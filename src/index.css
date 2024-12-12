@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+main{
+  min-height: 80vh;
+}
+.header_wrapper{
+  display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid;
+}
+.nav_wrap>ul {
+  display: flex;
+}
+.nav_wrap>ul>li {
+  margin: 0px 20px;
+}
+.banner_wrapper{
+  width: 100%;
+  height: 80vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner_content{
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.product_list_wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.product_list_wrap>.product_card_wrap {
+  flex-basis: 25%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.product_card{
+  background-color: #fff;
+  padding: 10px;
+  color: #000;
+}
+.product_container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 50px auto;
+  display: flex;
+}
+.product_container>div {
+  flex-basis: 50%;
+}
+.prd_img_wrap img {
+  width: 100%;
+}
+.prd_info_wrap .prd_desc {
+  margin: 15px 0px;
+}
+.cart_wrapper {
+  display: flex;
+}
+.cart_data_wrap {
+  width: 70%;
+}
+.cart_info_wrap {
+  width: 30%;
+}
+.cart_item {
+  display: flex;
+}
+.cart_item_img {
+  max-height: 150px;
+}
+.cart_item_img>img {
+  height: 100%;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
