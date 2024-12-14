@@ -4,7 +4,7 @@ import { shoppingCartContext } from '../context';
 
 const ProductDetail = () => {
     const {id} = useParams();
-    const{cartItems, setCartItems} = useContext(shoppingCartContext);
+    const{cartItems, productAddToCart} = useContext(shoppingCartContext);
     // console.log(id);
     const[productData, setProdudctData] = useState(null);
     const[loading, setLoading] = useState(true);
@@ -29,26 +29,35 @@ const ProductDetail = () => {
 
     const handleAddToCart = async() => {
         console.log('clicked add to cart.');
-        const copyCartItems = [...cartItems];
+        const copyCart = cartItems;
+        console.log("copy cart : ",copyCart);
+        const copyCartItems = [...copyCart.items];
         const currentPrd = productData;
-        const findPrdIndex = copyCartItems.findIndex(item => item.id === currentPrd.id);
-
-        if(findPrdIndex === -1){
+        let findPrdIndex = null;
+        if(copyCartItems.length > 0){
+            findPrdIndex = copyCartItems?.findIndex(item => item.id === currentPrd.id);
+        }
+        console.log("findPrdIndex : ",findPrdIndex);
+        if(copyCartItems.length == 0 || findPrdIndex === -1){
             currentPrd.quantity = 1;
             currentPrd.total = currentPrd.price * currentPrd.quantity;
             copyCartItems.push(currentPrd);
+            copyCart.total_price = copyCart.total_price + currentPrd.price;
+            copyCart.item_count = copyCart.item_count + currentPrd.quantity;
         }else{
+            
             copyCartItems.map(item => {
                 if(item.id === currentPrd.id){
                     item.quantity = item.quantity + 1;
                     item.total = item.price * item.quantity;
+                    copyCart.item_count = copyCart.item_count + 1;
+                    copyCart.total_price = copyCart.total_price + item.price;
                 }
             })
         }
-        
-        // console.log(copyCartItems);
-        setCartItems(copyCartItems);
-        localStorage.setItem('cart-data', JSON.stringify(copyCartItems))
+        copyCart.items = copyCartItems;
+        console.log("updated cart copy : ",copyCart);
+        productAddToCart(copyCart);
     }
 
     useEffect(() => {

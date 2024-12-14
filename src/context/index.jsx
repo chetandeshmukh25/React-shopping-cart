@@ -6,8 +6,13 @@ const ShoppingCartProvider = ({children}) => {
     const[name, setName] = useState('Chetan');
     const[productList, setProductList] = useState(null);
     const[loading, setLoading] = useState(true);
-    const[cartItems, setCartItems] = useState([]);
-    // console.log(cartItems);
+    const[cartItems, setCartItems] = useState({
+        item_count: 0,
+        total_price: 0,
+        items: []
+    });
+    // const[cartValue, setCartValue] = useState([]);
+    console.log(cartItems);
 
     const fetchProductList = async() => {
         
@@ -29,27 +34,21 @@ const ShoppingCartProvider = ({children}) => {
             setLoading(false);
         }
         
-        
-        // const resultAPI = ''; 
-        // fetch('https://dummyjson.com/productsa')
-        // .then((res) => {
-        //     console.log(res);
-        //     if(!res.ok){
-        //         throw new Error('HTTP error status : '+ res.status)
-        //     }else{
-        //         return res.json();
-        //     }
-        // })
-        // .then((result) => console.log(result))
-        // .catch((err) => console.log(err.message))
+    }
+    const productAddToCart = (cart_data) => {
+        console.log("get cart data : ", cart_data);
+        setCartItems(cart_data);
+        localStorage.setItem('cart-data', JSON.stringify(cart_data))
     }
     useEffect(() => {
         // console.log("1");
         fetchProductList();
         let getCartData = localStorage.getItem('cart-data');
         getCartData = JSON.parse(getCartData);
-        setCartItems(getCartData);
         console.log("2 : ", getCartData);
+        if(getCartData != null){
+            setCartItems(getCartData);
+        }
         return (() => {})
     },[]);
 
@@ -58,7 +57,7 @@ const ShoppingCartProvider = ({children}) => {
             productList, 
             loading, 
             cartItems, 
-            setCartItems
+            productAddToCart
         }}>
         {children}
     </shoppingCartContext.Provider>
